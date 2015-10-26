@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css" type="text/css">
+		<title>图书馆管理系统</title>
+	</head>
+	<body>
+		<style>
+		#borderbox{
+			margin-left:30%;
+			margin-right:30%;
+		}
+		</style>
+		<div id="borderbox">
+		<div align=center><h1>图书馆管理系统</h1></div><hr/>
+		<div class="am-panel am-panel-default">
+  			<div class="am-panel-hd">
+    			<h3 class="am-panel-title">{{name}}的作品:</h3>
+  			</div>
+  			{% for i in tit%}
+			{% for title in i %}
+  			<ul class="am-list am-list-static">
+    			<li>{{title}}</li>
+  			</ul>
+  			{% endfor %}
+			{% endfor %}
+		</div>
+	</div>
+	</body>
+</html>
+

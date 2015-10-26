@@ -2,23 +2,34 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet" href="style/css/amazeui.flat.min.css" type="text/css">
-		<script src="style/js/jquery.min.js"></script>
-		<script src="style/js/amazeui.min.js"></script>
+		<link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css" type="text/css">
+		<link rel="stylesheet" href="basic.css" type="text/css">
+		<!--<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+		<script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script>-->
 		<title>图书馆管理系统</title>
 	</head>
 	<body>
+		<style>
+		#borderbox{
+			margin-left:30%;
+			margin-right:30%;
+		}
+		</style>
+		{% if error %}
 		<div align=center><h1>图书馆管理系统</h1></div><hr/>
+		{% endif %}
+		<form  action="" method="get">
 		<div class="am-g">
-  		<div class="am-u-lg-6" align=center>
-    		<div class="am-input-group"><input type="text" class="am-form-field">
+  		<div id="borderbox">
+    		<div class="am-input-group"><input type="text" class="am-form-field" placeholder="请输入作者的姓名" name="name">
       			<span class="am-input-group-btn">
-        			<button class="am-btn am-btn-default" type="button"><span class="am-icon-search"></span> </button>
+        			<button class="am-btn am-btn-default" type="submit"><span class="am-icon-search"></span> </button>
       			</span>
       
     		</div>
   		</div>
   	</div>
+  </form>
 
 	</body>
 </html>

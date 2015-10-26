@@ -15,7 +15,19 @@ def ClassroonAdd(request):
         transaction.commit_unless_managed()  
         cursor.close()  
           
-        return render_to_response('library/Classroom_Add_results.html',  
-            {'name': name})  
+        return render_to_response('library/Classroom_Add_results.html', {'name': name})  
     else:  
-        return render_to_response('library/Classroom_Add.html', {'error': True}) 
+        return render_to_response('library/Classroom_Add.html', {'error': True})
+
+def index(request):
+    if 'name' in request.GET and request.GET['name']:
+        name = request.GET['name']
+        cursor = connection.cursor()
+        cursor.execute('select TITLE from Book left join Author on Book.AuthorID=Author.AuthorID where Author.Name = \''+name+'\'')
+        title = cursor.fetchall()
+        transaction.commit_unless_managed()
+        cursor.close()
+        dic = {'tit': title,'name':name}
+        return render_to_response('library/author_book.html', dic)
+    else:
+        return render_to_response('library/index.html', {'error': True})
