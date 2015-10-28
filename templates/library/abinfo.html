@@ -15,19 +15,17 @@
 			float:right;
 		}
 		</style>
-		<form  action="abinfo.html" method="get">
+		<form  action="" method="get">
 		<div class="am-g">
   		<div id="borderbox">
     		<div align=center><h1>图书馆管理系统</h1></div><hr/>
       		<div class="am-panel am-panel-default">
   			<div class="am-panel-hd">
-    			<h3 class="am-panel-title">{{name}}的作品:</h3>
+    			<h3 class="am-panel-title">{{title}}:</h3>
   			</div>
-  			{% for i in books%}
+  			{% for i in bookinfo%}
   			<ul class="am-list am-list-static">
-    			<li><div><a href="abinfo.html?booktitle={{i.1}}">{{i.1}}</a>
-    				<div id="booktitle"><button type="submit" class="am-btn am-btn-danger am-radius">删除</button><button type="submit" class="am-btn am-btn-secondary am-radius">更新</button>
-    				</div></div></li>
+    			<li>{{i.0}}</li>
   			</ul>
 			{% endfor %}
 			</div>

@@ -23,11 +23,24 @@ def index(request):
     if 'name' in request.GET and request.GET['name']:
         name = request.GET['name']
         cursor = connection.cursor()
-        cursor.execute('select TITLE from Book left join Author on Book.AuthorID=Author.AuthorID where Author.Name = \''+name+'\'')
-        title = cursor.fetchall()
+        cursor.execute('select * from Book left join Author on Book.AuthorID=Author.AuthorID where Author.Name = \''+name+'\'')
+        books = cursor.fetchall()
         transaction.commit_unless_managed()
         cursor.close()
-        dic = {'tit': title,'name':name}
+        dic = {'books': books,'name':name}
         return render_to_response('library/author_book.html', dic)
     else:
         return render_to_response('library/index.html', {'error': True})
+
+def bookinfo(request):
+    if 'booktitle' in request.GET and request.GET['booktitle']:
+        booktitle = request.GET['booktitle']
+        cursor = connection.cursor()
+        cursor.execute('select * from Book where TITLE=\''+booktitle+'\'')
+        bookinfo = cursor.fetchall()
+        transaction.commit_unless_managed()
+        cursor.close()
+        dic = {'bookinfo':bookinfo,'title':booktitle}
+        return render_to_response('library/abinfo.html',dic)
+    else:
+        return render_to_response('library/author_book.html', {'error': True})

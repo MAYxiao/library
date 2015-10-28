@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'lab3.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', 'lab3.library.views.index'),
+    url(r'^abinfo.html$', 'lab3.library.views.bookinfo'),
     url(r'^ClassRoom/add/$', 'lab3.library.views.ClassroonAdd'),  
     url(r'^admin/', include(admin.site.urls)),
 )
