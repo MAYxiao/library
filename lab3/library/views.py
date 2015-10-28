@@ -65,9 +65,11 @@ def delete(request):
         return render_to_response('library/author_book.html', {'error': True})
 
 def update(request):
+    global isbn
     if 'isbn' in request.GET and request.GET['isbn'] and 'aid' in request.GET and request.GET['aid']:
         isbn = request.GET['isbn']
         aid = request.GET['aid']
+        
         cursor = connection.cursor()
         cursor.execute('select * from Book where ISBN = \''+isbn+'\'')
         bookinfo = cursor.fetchall()
@@ -77,6 +79,34 @@ def update(request):
         cursor.close()
         dic = {'bookinfo':bookinfo,'userinfo':userinfo}
         return render_to_response('library/update.html',dic)
+    elif 'publisher' in request.GET and 'time' in request.GET and 'price' in request.GET and 'name' in request.GET and 'age' in request.GET and 'country' in request.GET:
+        publisher = request.GET['publisher']
+        time = request.GET['time']
+        price = request.GET['price']
+        name = request.GET['name']
+        age = request.GET['age']
+        country = request.GET['country']
+        cursor = connection.cursor()
+        cursor.execute('select * from Author where Name = \''+name+'\'')
+        userinfo = cursor.fetchall();
+        if userinfo:
+            cursor.execute('update Author set Name = \''+name+'\',Age=\''+age+'\',Country=\''+country+'\' where Name = \''+name+'\'')
+            transaction.commit_unless_managed()
+            cursor.execute('select * from Author where Name = \''+name+'\'')
+            userinfo = cursor.fetchall()
+        else:
+            cursor.execute('insert into Author(Name,Age,Country) values (\''+name+'\',\''+age+'\',\''+country+'\')')
+            transaction.commit_unless_managed()
+            cursor.execute('select * from Author where Name = \''+name+'\'')
+            userinfo = cursor.fetchall()
+        for row in userinfo:
+            aid = row[0]
+        cursor.execute('update Book set AuthorID=\''+aid+'\',Publisher=\''+publisher+'\',PublisherDate=\''+time+'\',Price=\''+price+'\' where ISBN = \''+isbn+'\'')
+        transaction.commit_unless_managed()
+        cursor.execute('select * from Book where ISBN = \''+isbn+'\'')
+        bookinfo = cursor.fetchall();
+        dic={'bookinfo':bookinfo,'userinfo':userinfo}
+        return render_to_response('library/abinfo.html',dic)
     else:
         return render_to_response('library/author_book.html', {'error': True})
 
