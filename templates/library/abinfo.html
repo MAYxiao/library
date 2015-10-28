@@ -8,26 +8,65 @@
 	<body>
 		<style>
 		#borderbox{
-			margin-left:30%;
-			margin-right:30%;
+			margin-left:20%;
+			margin-right:20%;
 		}
 		#booktitle{
 			float:right;
 		}
+		body{
+			background-image:url(http://i13.tietuku.com/a3666639f1ffd447.jpg);
+		}
 		</style>
+		<div align=center><h1>图书馆管理系统</h1>
+		
+		<a href=""><span class="am-icon-arrow-left" onclick="javascript:window.history.back(-1);"></span></a>&nbsp&nbsp&nbsp
+		<a href="http://lab3.sinaapp.com/"><span class="am-icon-home"></span></a>&nbsp&nbsp&nbsp
+		<a href=""><span class="am-icon-arrow-right" onclick="javascript:window.history.back(1);"></span></a>
+		</div><hr/>
 		<form  action="" method="get">
 		<div class="am-g">
   		<div id="borderbox">
-    		<div align=center><h1>图书馆管理系统</h1></div><hr/>
       		<div class="am-panel am-panel-default">
-  			<div class="am-panel-hd">
-    			<h3 class="am-panel-title">{{title}}:</h3>
-  			</div>
-  			{% for i in bookinfo%}
-  			<ul class="am-list am-list-static">
-    			<li>{{i.0}}</li>
-  			</ul>
-			{% endfor %}
+  			<table class="am-table am-table-bordered am-table-striped am-table-hover">
+  				<caption><h2>书名：{{title}}</h2><caption>
+    		<thead>
+        	<tr>
+            	<th>ISBN</th>
+            	<th>出版日期</th>
+            	<th>出版社</th>
+            	<th>价格</th>
+        	</tr>
+    		</thead>
+    		{%for binfo in bookinfo%}
+    		<tbody>
+        	<tr class="am-active">
+            	<td>{{binfo.0}}</td>
+            	<td>{{binfo.4}}</td>
+            	<td>{{binfo.3}}</td>
+            	<td>{{binfo.5}}</td>
+        	</tr>
+    		</tbody>
+    		{% endfor %}
+    		<thead>
+        	<tr>
+            	<th>作者</th>
+            	<th>作者ID</th>
+            	<th>年龄</th>
+            	<th>国家</th>
+        	</tr>
+    		</thead>
+    		{%for uinfo in userinfo%}
+    		<tbody>
+        	<tr class="am-active">
+            	<td>{{uinfo.1}}</td>
+            	<td>{{uinfo.0}}</td>
+            	<td>{{uinfo.2}}</td>
+            	<td>{{uinfo.3}}</td>
+        	</tr>
+    		</tbody>
+    		{% endfor %}
+			</table>
 			</div>
     		</div>
   		</div>

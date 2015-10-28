@@ -38,9 +38,60 @@ def bookinfo(request):
         cursor = connection.cursor()
         cursor.execute('select * from Book where TITLE=\''+booktitle+'\'')
         bookinfo = cursor.fetchall()
+        cursor.execute('select * from Author right join Book on Author.AuthorID=Book.AuthorID where Book.TITLE = \''+booktitle+'\'')
+        userinfo = cursor.fetchall()
         transaction.commit_unless_managed()
         cursor.close()
-        dic = {'bookinfo':bookinfo,'title':booktitle}
+        dic = {'bookinfo':bookinfo,'title':booktitle,'userinfo':userinfo}
         return render_to_response('library/abinfo.html',dic)
+    else:
+        return render_to_response('library/author_book.html', {'error': True})
+
+def delete(request):
+    if 'title' in request.GET and request.GET['title'] and 'aid' in request.GET and request.GET['aid']:
+        booktitle = request.GET['title']
+        aid = request.GET['aid']
+        cursor = connection.cursor()
+        cursor.execute('delete from Book where TITLE=\''+booktitle+'\'')
+        transaction.commit_unless_managed()
+        cursor.execute('select * from Book where AuthorID=\''+aid+'\'')
+        books = cursor.fetchall();
+        cursor.execute('select Name from Author where AuthorID=\''+aid+'\'')
+        name = cursor.fetchall();
+        cursor.close()
+        dic = {'books':books,'name':name}
+        return render_to_response('library/author_book.html',dic)
+    else:
+        return render_to_response('library/author_book.html', {'error': True})
+
+def update(request):
+    if 'isbn' in request.GET and request.GET['isbn'] and 'aid' in request.GET and request.GET['aid']:
+        isbn = request.GET['isbn']
+        aid = request.GET['aid']
+        cursor = connection.cursor()
+        cursor.execute('select * from Book where ISBN = \''+isbn+'\'')
+        bookinfo = cursor.fetchall()
+        cursor.execute('select * from Author where AuthorID = \''+aid+'\'')
+        userinfo = cursor.fetchall()
+        transaction.commit_unless_managed()
+        cursor.close()
+        dic = {'bookinfo':bookinfo,'userinfo':userinfo}
+        return render_to_response('library/update.html',dic)
+    else:
+        return render_to_response('library/author_book.html', {'error': True})
+
+def result(request):
+    if 'bookinfo' in request.GET and request.GET['bookinfo'] and 'userinfo' in request.GET and request.GET['userinfo']:
+        bookinfo = request.GET['bookinfo']
+        userinfo = request.GET['userinfo']
+        cursor = connection.cursor()
+        cursor.execute('select * from Book where ISBN = \''+isbn+'\'')
+        bookinfo = cursor.fetchall()
+        cursor.execute('select * from Author where AuthorID = \''+aid+'\'')
+        userinfo = cursor.fetchall()
+        transaction.commit_unless_managed()
+        cursor.close()
+        dic = {'bookinfo':bookinfo,'userinfo':userinfo}
+        return render_to_response('library/update.html',dic)
     else:
         return render_to_response('library/author_book.html', {'error': True})

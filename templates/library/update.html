@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css" type="text/css">
+		<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+		<script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script>
+		<title>图书馆管理系统</title>
+	</head>
+	<body>
+		<style>
+		#borderbox{
+			margin-left:30%;
+			margin-right:30%;
+		}	
+		body{
+			background-image:url(http://i13.tietuku.com/a3666639f1ffd447.jpg);
+		}
+		.am-input-group{
+			margin-top: 10px;
+		}
+		#butt{
+			margin:40px auto;
+			text-align: center;
+		}
+		</style>
+		<div align=center><h1>图书馆管理系统</h1>
+		
+		<a href=""><span class="am-icon-arrow-left" onclick="javascript:window.history.back(-1);"></span></a>&nbsp&nbsp&nbsp
+		<a href="http://lab3.sinaapp.com/"><span class="am-icon-home"></span></a>&nbsp&nbsp&nbsp
+		<a href=""><span class="am-icon-arrow-right" onclick="javascript:window.history.back(1);"></span></a>
+		</div><hr/>
+		<form  action="" method="get">
+			{% for binfo in bookinfo%}
+			<div id="borderbox">
+			<div align=center><h1>更新——{{binfo.1}}</h1></div>
+			<div class="am-input-group am-input-group-secondary">
+  				<span class="am-input-group-label"><i class="am-icon-leanpub am-icon-fw"></i>出版</span>
+  				<input type="text" class="am-form-field" placeholder="出版社" value={{binfo.3}} name="publisher">
+			</div>
+
+			<div class="am-input-group am-input-group-danger">
+  				<span class="am-input-group-label"><i class="am-icon-clock-o am-icon-fw"></i>时间</span>
+  				<input type="text" class="am-form-field" placeholder="出版时间" value={{binfo.4}} name="time">
+			</div>
+
+			<div class="am-input-group am-input-group-success">
+  				<span class="am-input-group-label"><i class="am-icon-cny am-icon-fw"></i>价格</span>
+  				<input type="text" class="am-form-field" placeholder="价格" value={{binfo.5}} name="price">
+			</div>
+			{% endfor %}
+			{% for uinfo in userinfo %}
+			<div class="am-input-group am-input-group-primary">
+  				<b></b><span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i>作者</span>
+  				<input type="text" class="am-form-field" placeholder="作者姓名" value={{uinfo.1}} name="name">
+			</div>
+
+			<div class="am-input-group am-input-group-danger">
+  				<span class="am-input-group-label"><i class="am-icon-heart am-icon-fw"></i>年龄</span>
+  				<input type="text" class="am-form-field" placeholder="作者年龄" value={{uinfo.2}} name="age">
+			</div>
+
+			<div class="am-input-group am-input-group-warning">
+  				<span class="am-input-group-label"><i class="am-icon-university am-icon-fw"></i>国家</span>
+  				<input type="text" class="am-form-field" placeholder="国家" value={{uinfo.3}} name="country">
+			</div>
+			{% endfor %}
+			<div id="butt"><button type="submit" class="am-btn am-btn-danger am-round">立即保存</button></div>
+		</div>
+  		</form>
+
+	</body>
+</html>

@@ -3,6 +3,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css" type="text/css">
+		<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+		<script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script>
 		<title>图书馆管理系统</title>
 	</head>
 	<body>
@@ -14,28 +16,41 @@
 		#booktitle{
 			float:right;
 		}
+		body{
+			background-image:url(http://i13.tietuku.com/a3666639f1ffd447.jpg);
+		}
 		</style>
+		<div align=center><h1>图书馆管理系统</h1>
+		
+		<a href=""><span class="am-icon-arrow-left" onclick="javascript:window.history.back(-1);"></span></a>&nbsp&nbsp&nbsp
+		<a href="http://lab3.sinaapp.com/"><span class="am-icon-home"></span></a>&nbsp&nbsp&nbsp
+		<a href=""><span class="am-icon-arrow-right" onclick="javascript:window.history.back(1);"></span></a>
+		</div><hr/>
 		<form  action="abinfo.html" method="get">
 		<div class="am-g">
   		<div id="borderbox">
-    		<div align=center><h1>图书馆管理系统</h1></div><hr/>
       		<div class="am-panel am-panel-default">
   			<div class="am-panel-hd">
-    			<h3 class="am-panel-title">{{name}}的作品:</h3>
+  				{% for na in name%}
+    			<h3 class="am-panel-title">{{na.0}}的作品:</h3>
+    			{% endfor %}
   			</div>
   			{% for i in books%}
   			<ul class="am-list am-list-static">
     			<li><div><a href="abinfo.html?booktitle={{i.1}}">{{i.1}}</a>
-    				<div id="booktitle"><button type="submit" class="am-btn am-btn-danger am-radius">删除</button><button type="submit" class="am-btn am-btn-secondary am-radius">更新</button>
+    				<div id="booktitle">
+    						<a href="http://lab3.sinaapp.com/update.html/?isbn={{i.0}}&aid={{i.2}}"><span class="am-icon-refresh am-icon-spin"></span>更新</a>&nbsp&nbsp&nbsp
+    						<a href="http://lab3.sinaapp.com/delete.html/?title={{i.1}}&aid={{i.2}}"><span class="am-icon-close">删除</span></a>
     				</div></div></li>
   			</ul>
 			{% endfor %}
 			</div>
     		</div>
   		</div>
-  	</div>
+  	
   </form>
 	</div>
 	</body>
+
 </html>
 
