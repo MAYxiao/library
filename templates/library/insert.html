@@ -3,8 +3,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css" type="text/css">
-		<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
-		<script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script>
+		<!--<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+		<script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script>-->
 		<title>图书馆管理系统</title>
 	</head>
 	<body>
@@ -24,49 +24,55 @@
 			text-align: center;
 		}
 		</style>
+		{% if error %}
+		{% endif %}
 		<div align=center><h1>图书馆管理系统</h1>
-		
 		<a href=""><span class="am-icon-arrow-left" onclick="javascript:window.history.back(-1);"></span></a>&nbsp&nbsp&nbsp
 		<a href="http://lab3.sinaapp.com/"><span class="am-icon-home"></span></a>&nbsp&nbsp&nbsp
 		<a href=""><span class="am-icon-arrow-right" onclick="javascript:window.history.back(1);"></span></a>
 		</div><hr/>
 		<form  action="" method="get">
-			{% for binfo in bookinfo%}
 			<div id="borderbox">
-			<div align=center><h1>更新——{{binfo.1}}</h1></div>
-			<div class="am-input-group am-input-group-secondary">
-  				<span class="am-input-group-label"><i class="am-icon-leanpub am-icon-fw"></i>出版</span>
-  				<input type="text" class="am-form-field" placeholder="出版社" value={{binfo.3}} name="publisher">
-			</div>
+			<div align=center><h1>新增——{{name}}的作品</h1></div>
 
 			<div class="am-input-group am-input-group-danger">
+  				<span class="am-input-group-label"><i class="am-icon-book am-icon-fw"></i>书名</span>
+  				<input type="text" class="am-form-field" placeholder="作品名称" name="title">
+			</div>
+
+			<div class="am-input-group am-input-group-warning">
+  				<span class="am-input-group-label"><i class="am-icon-bookmark am-icon-fw"></i>ISBN</span>
+  				<input type="text" class="am-form-field" placeholder="ISBN" name="isbn">
+			</div>
+
+			<div class="am-input-group am-input-group-secondary">
+  				<span class="am-input-group-label"><i class="am-icon-leanpub am-icon-fw"></i>出版</span>
+  				<input type="text" class="am-form-field" placeholder="出版社" name="publisher">
+			</div>
+
+			<div class="am-input-group am-input-group-primary">
   				<span class="am-input-group-label"><i class="am-icon-clock-o am-icon-fw"></i>时间</span>
-  				<input type="text" class="am-form-field" placeholder="出版时间" value={{binfo.4}} name="time">
+  				<input type="text" class="am-form-field" placeholder="出版时间" name="time">
 			</div>
 
 			<div class="am-input-group am-input-group-success">
   				<span class="am-input-group-label"><i class="am-icon-cny am-icon-fw"></i>价格</span>
-  				<input type="text" class="am-form-field" placeholder="价格" value={{binfo.5}} name="price">
+  				<input type="text" class="am-form-field" placeholder="价格" name="price">
 			</div>
-			{% endfor %}
-			{% for uinfo in userinfo %}
-			<div class="am-input-group am-input-group-primary">
-  				<b></b><span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i>作者</span>
-  				<input type="text" class="am-form-field" placeholder="作者姓名" value={{uinfo.1}} name="name">
-			</div>
+			{% if flag == 0%}
 
 			<div class="am-input-group am-input-group-danger">
   				<span class="am-input-group-label"><i class="am-icon-heart am-icon-fw"></i>年龄</span>
-  				<input type="text" class="am-form-field" placeholder="作者年龄" value={{uinfo.2}} name="age">
+  				<input type="text" class="am-form-field" placeholder="作者年龄" name="age">
 			</div>
 
 			<div class="am-input-group am-input-group-warning">
   				<span class="am-input-group-label"><i class="am-icon-university am-icon-fw"></i>国家</span>
-  				<input type="text" class="am-form-field" placeholder="国家" value={{uinfo.3}} name="country">
+  				<input type="text" class="am-form-field" placeholder="作者国家" name="country">
 			</div>
-			{% endfor %}
-			{% for binfo in bookinfo%}
-			<div id="butt"><button type="submit" class="am-btn am-btn-danger am-round" name="title"value={{binfo.1}}>立即保存</button></div>{% endfor %}
+			{% endif %}
+
+			<div id="butt"><button type="submit" class="am-btn am-btn-danger am-round" name="name" value={{name}}>立即保存</button></div>
 		</div>
   		</form>
 

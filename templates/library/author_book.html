@@ -13,12 +13,13 @@
 			margin-left:30%;
 			margin-right:30%;
 		}
-		#booktitle{
+		#booktitle,#icon{
 			float:right;
 		}
 		body{
 			background-image:url(http://i13.tietuku.com/a3666639f1ffd447.jpg);
 		}
+		h3{display : inline}
 		</style>
 		<div align=center><h1>图书馆管理系统</h1>
 		
@@ -31,9 +32,8 @@
   		<div id="borderbox">
       		<div class="am-panel am-panel-default">
   			<div class="am-panel-hd">
-  				{% for na in name%}
-    			<h3 class="am-panel-title">{{na.0}}的作品:</h3>
-    			{% endfor %}
+    			<h3 class="am-panel-title">{{name}}的作品:</h3>
+    			<a href="http://lab3.sinaapp.com/insert.html/?name={{name}}"><i class="am-icon-plus" id="icon">新增</i></a>
   			</div>
   			{% for i in books%}
   			<ul class="am-list am-list-static">

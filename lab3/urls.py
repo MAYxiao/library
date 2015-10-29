@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^delete.html/$', 'lab3.library.views.delete'),
     url(r'^update.html/$', 'lab3.library.views.update'),
     url(r'^abinfo.html/$', 'lab3.library.views.bookinfo'),
-    url(r'^ClassRoom/add/$', 'lab3.library.views.ClassroonAdd'),
+    url(r'^insert.html/$', 'lab3.library.views.insert'),
+    
     url(r'^admin/', include(admin.site.urls)),
 )
