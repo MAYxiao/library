@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     url(r'^insert.html/$', 'lab3.library.views.insert'),
     
                        
+                       
     url(r'^admin/', include(admin.site.urls)),
 )
